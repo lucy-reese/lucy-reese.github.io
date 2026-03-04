@@ -1,0 +1,76 @@
+body {
+  font: 1.2em / 1.5 sans-serif;
+}
+.one ul {
+  max-width: 750px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.one a:link,
+.one a:visited {
+  background-color: #4d7298;
+  border: 2px solid #77a6b6;
+  border-radius: 0.5em;
+  color: white;
+  padding: 0.5em;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.one ul {
+  /* Add styles here */
+}
+/*-----------------------Second Exercise------------------------*/
+body {
+  font: 1.2em / 1.5 sans-serif;
+}
+.two {
+  max-width: 750px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #4d7298;
+  border: 2px solid #77a6b6;
+  border-radius: 0.5em;
+  color: white;
+  padding: 0.5em;
+}
+
+ul {
+  /* Add styles here */
+}
+
+li {
+  /* Add styles here */
+}
+/*-----------------------Third Exercise------------------------*/
+body {
+  font: 1.2em / 1.5 sans-serif;
+}
+ul {
+  width: 450px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #4d7298;
+  border: 2px solid #77a6b6;
+  border-radius: 0.5em;
+  color: white;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+ul {
+  /* Add styles here */
+}
+
+li {
+  /* Add styles here */
+}
