@@ -19,7 +19,8 @@ body {
 }
 
 .one ul {
-  /* Add styles here */
+  display: flex;
+  justify-content: space-between;
 }
 /*-----------------------Second Exercise------------------------*/
 body {
@@ -32,7 +33,7 @@ body {
   margin: 0;
 }
 
-li {
+.two li {
   background-color: #4d7298;
   border: 2px solid #77a6b6;
   border-radius: 0.5em;
@@ -40,25 +41,29 @@ li {
   padding: 0.5em;
 }
 
-ul {
-  /* Add styles here */
+.two ul {
+  display: flex;
 }
 
-li {
-  /* Add styles here */
+.two li {
+  flex: 1;
+}
+
+.two li:first-child {
+  flex: 2;
 }
 /*-----------------------Third Exercise------------------------*/
 body {
   font: 1.2em / 1.5 sans-serif;
 }
-ul {
+.three ul {
   width: 450px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-li {
+.three li {
   background-color: #4d7298;
   border: 2px solid #77a6b6;
   border-radius: 0.5em;
@@ -68,9 +73,10 @@ li {
 }
 
 ul {
-  /* Add styles here */
+  display: flex;
+  flex-wrap: wrap;
 }
 
 li {
-  /* Add styles here */
+  flex: 1 1 auto;
 }
