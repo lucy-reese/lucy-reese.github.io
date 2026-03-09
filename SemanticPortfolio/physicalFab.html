@@ -19,17 +19,36 @@
     <br></br><a href="portfolio.html">  &#8592 Back to Portfolio Page</a>
     <h1>Physical Fabrication</h1>
     <h2 id="electric">Electronics Empahsis Projects</h2>
+    <h3>Potted Security</h3>
+    <p>A secure contraption to keep your valuables hidden in plain sight.</p>
     <aside>
             <img src="IMG_3052.jpg" height="250" alt="Lockbox contraption that looks like a potted plant">
             <img src="IMG_3064.jpg" height="250" alt="Potted plant lockbox contraption with cover removed revealing keypad">
             <img src="IMG_3074.jpg" height="250" alt="Potted plant lockbox contraption with top plant removed to show lockbox inside"> 
         </aside>
-        <p><strong>Potted Security:</strong> A secure contraption to keep your valuables hidden in plain sight.</p>
         <p>This project was made to solve my personal pet peeve of not having a lockbox for my valuables. 
         As a poor college student, I cannot financially afford a large enough lockbox (which costs upwards of $150)
         to keep important documents and electronics secure. With my Arduino kit and a little creativity, I found 
         I could make a more affordable and inventive strongbox. I took this project a step further and made the 
         lockbox appear to be a houseplant to further disguise the true purpose of this contraption.</p>
+        <h3>First Project Iteration</h3>
+        <p>My previous iteration of this project was a laser cut box with a keypad and LCD screen that could either detect if the password was correct or incorrect. To lock the box, you had to put in an incorrect password to prompt the servo motor to lock the box, a similar concept to scrambling a combination lock. All my hardware was exposed within the storage compartment and hastily secured using tape on the top of the box. The first iteration gave me a great deal of experience that motivated me to continue to build upon this idea for this next project. Some areas for improvement included tidying up the enclosure, adding more Arduino components, as well as improving the workflow of the prompts and passwords in the code. </p>
+        <video width="640" height="360" controlsList="nodownload" controls poster="IMG_0600.jpg">
+            <source src="FinalWorkingLockbox.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video width="640" height="360" controlsList="nodownload" controls poster="ComponentsFreezeFrame.png">
+            <source src="ComponentsOutsideOfLockbox.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h3>Enclosure</h3>
+        <p>For my enclosure the second time around, I 3D printed it rather than laser cutting it. I chose this method because it allowed me to create curves and design pieces with inlaid components to secure the hardware as well as create the false bottom to hide the jumble of wires. I created two pieces to hide the electronics. First was the front panel to hide the keypad and LCD screen from the inside, and the second was the false bottom for the rest of the hardware. Making this a 3D printed enclosure also allowed me to create a seamless cover to externally hide the keypad and LCD screen from potential robbers. The 3D print also aesthetically looks more like a clay planter pot which helped to sell the facade that the lockbox was a decorative piece. The power source for my project is a 9-volt battery, which helps the enclosure keep its appearance of a houseplant, but dies quickly if continuously plugged in. My solution to this was to create a planter plate on the bottom to house the battery and wire without exposing the other hardware. </p>
+        <h3>Hardware</h3>
+        <p>While I kept the LCD screen and keypad, I added a passive buzzer to create sound for different guesses. This helped to reinforce good guesses and deter thieves from continuing to attempt their robbery. I don’t consider myself very musically gifted, so adding this component taught me a lot about the different tones to help create tunes using the buzzer. Different tones correspond to different musical notes, so I not only had to find the correct notes to create the tune I was looking for, but also the designated frequency for those notes. </p>
+        <h3>Programming</h3>
+        <p>The main issue I looked to resolve between my first iteration and my second iteration in terms of programming was having multiple passwords to lock or unlock the box. I learned how to use the implementation of the “Password.h” Arduino library to gain input from the user and link corresponding actions (lock, unlock, play audio) to specific passcodes. I also added a string of “if else” statements that gave a different string of snarky comments for every incorrect guess, culminating in a police siren sound with a message saying that the police have been contacted regarding the robbery. </p>
+        <h3>Reflection</h3>
+        <p>I was happy with the final product and the progress I made in all aspects from the first iteration of my lockbox to the second. There is always opportunity for growth and in future iterations I would love to spend more time on programming to make it more interactive (such as adding a code for the thief to guess to stop the siren), as well as implement a deep sleep code to save battery (eliminating the need to plug and unplug the battery every time it is used). </p>
 </body>
 <footer>
     <h2>Contact</h2>
