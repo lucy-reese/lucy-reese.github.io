@@ -172,15 +172,84 @@
             grid-row: 1;
         }
 */
+.navbar ul {
+    list-style-type: none; /* Removes bullet points */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Contains the floated list items */
+    background-color:#594B5D; /* Dark background color */
+    display: flex; /* Aligns list items horizontally using Flexbox */
+    justify-content: space-around; /* Distributes space evenly */
+    position: sticky;
+}
 
+.navbar li a {
+    display: block; /* Makes the entire link area clickable and allows padding/margin */
+    color: white; /* White text color */
+    text-align: center;
+    padding: 14px 16px; /* Adds internal spacing around the text */
+    text-decoration: none; /* Removes underlines from links */
+      position: sticky;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.navbar li a:hover {
+    background-color: #ddd; /* Changes background color on hover */
+    color: black;
+      position: sticky;
+}
+
+h2 a {
+    
+}
+
+.contact ul{
+    list-style-type: none; /* Removes bullet points */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Contains the floated list items */
+    background-color: #003E1F; /* Dark background color */
+    display: flex; /* Aligns list items horizontally using Flexbox */
+    justify-content: space-around; /* Distributes space evenly */
+}
+.contact li{
+    color: white; /* White text color */
+    text-align: center;
+    padding: 14px 16px; /* Adds internal spacing around the text */
+}
+.contact li a{
+    display: block; /* Makes the entire link area clickable and allows padding/margin */
+    color: white; /* White text color */
+    text-align: center;
+    padding: 14px 16px; /* Adds internal spacing around the text */
+    text-decoration: none; /* Removes underlines from links */
+}
+.contact li a:hover {
+    background-color: #ddd; /* Changes background color on hover */
+    color: black;
+}
+footer{
+    width: 100%;
+}
+
+/*
         nav {
         height: 100px;
         flex: 75%;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         text-align: center;
         vertical-align: middle;
-        }
+        width: 100%;            
+        height: 150px;            
+        background-color: #3498db; 
+        overflow: hidden;
+    }
 
         nav ul a:hover{
         padding: 0;
@@ -211,7 +280,7 @@
             color: red;
         }
 
-
+*/
         /*
         .navbar{
             align-items: center;
