@@ -205,7 +205,12 @@ nav{
 }
 
 h2 a {
-    
+    display: block; /* Makes the entire link area clickable and allows padding/margin */
+    color: white; /* White text color */
+    text-align: center;
+    padding: 14px 16px; /* Adds internal spacing around the text */
+    text-decoration: none; /* Removes underlines from links */
+    position: sticky;
 }
 
 .contact ul{
