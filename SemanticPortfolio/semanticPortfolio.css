@@ -151,145 +151,114 @@
             background-color: var(--color-primary);
             height: 55px;
         }
-/*
-        nav ul{
-            z-index: 10;
-            float: left;
-            align-items: center;
-            color: #31081F;
-            text-align: center;
-            padding: 14px 16px;
+
+        .navbar {
+            margin: 1em auto 3em auto;
+            width: min(1000px, 100%);
+        }
+
+        .navbar ul {
             display: flex;
-            background-color: var(--color-background);
-            list-style-type: none; /* Removes bullet points *//*
-            margin: 0;
-            padding: 0;
-        }
-        
-        nav{
-            display: grid;
-            grid-column: 4;
-            grid-row: 1;
-        }
-*/
-.navbar ul {
-    list-style-type: none; /* Removes bullet points */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Contains the floated list items */
-    background-color:#594B5D; /* Dark background color */
-    display: flex; /* Aligns list items horizontally using Flexbox */
-    justify-content: space-around; /* Distributes space evenly */
-    position: sticky;
-}
-
-.navbar li a {
-    display: block; /* Makes the entire link area clickable and allows padding/margin */
-    color: white; /* White text color */
-    text-align: center;
-    padding: 14px 16px; /* Adds internal spacing around the text */
-    text-decoration: none; /* Removes underlines from links */
-      position: sticky;
-}
-
-nav{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-.navbar li a:hover {
-    background-color: #ddd; /* Changes background color on hover */
-    color: black;
-      position: sticky;
-}
-
-h2 a {
-    display: block; /* Makes the entire link area clickable and allows padding/margin */
-    color: white; /* White text color */
-    text-align: center;
-    padding: 14px 16px; /* Adds internal spacing around the text */
-    text-decoration: none; /* Removes underlines from links */
-    position: sticky;
-}
-
-.contact ul{
-    list-style-type: none; /* Removes bullet points */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Contains the floated list items */
-    background-color: #003E1F; /* Dark background color */
-    display: flex; /* Aligns list items horizontally using Flexbox */
-    justify-content: space-around; /* Distributes space evenly */
-}
-.contact li{
-    color: white; /* White text color */
-    text-align: center;
-    padding: 14px 16px; /* Adds internal spacing around the text */
-}
-.contact li a{
-    display: block; /* Makes the entire link area clickable and allows padding/margin */
-    color: white; /* White text color */
-    text-align: center;
-    padding: 14px 16px; /* Adds internal spacing around the text */
-    text-decoration: none; /* Removes underlines from links */
-}
-.contact li a:hover {
-    background-color: #ddd; /* Changes background color on hover */
-    color: black;
-}
-footer{
-    width: 100%;
-}
-
-/*
-        nav {
-        height: 100px;
-        flex: 75%;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        text-align: center;
-        vertical-align: middle;
-        width: 100%;            
-        height: 150px;            
-        background-color: #3498db; 
-        overflow: hidden;
-    }
-
-        nav ul a:hover{
-        padding: 0;
-        list-style-type: none;
-        flex: 2;
-        display: flex;
-        color:#C8040E
-        }
-
-        nav li {
-        display: inline;
-        text-align: center;
-        flex: 1;
-        }
-
-        nav a, nav span {
-        display: inline-block;
-        font-size: 2rem;
-        height: 3rem;
-        line-height: 1.7;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: black;
-        }
-        
-        .navbar a.active,
-        .navbar a:hover{
-            color: red;
-        }
-
-*/
-        /*
-        .navbar{
             align-items: center;
-            position: sticky;
-            top: 0;
+            list-style-type: none;
+            gap: 2em;
+            
         }
-        */
+
+        .navbar li:first-child {
+            margin-right: auto;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: var(--color-neutral);
+        }
+
+        .navbar a:hover{
+            text-decoration: underline;
+
+        }
+
+        section {
+            margin: 2em auto;
+            width: min(75em, 100%);
+            padding: min(2em, 15%);
+            border-radius: 1em;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3em;
+        }
+
+        #headshot {
+            max-width: 100%;
+            border-radius: 1em;
+            object-fit: cover;
+            object-position: left;
+        }
+        
+        .text-container {
+            flex: 0 1 34em;
+        }
+
+        .right-grid {
+            grid-template-areas: 
+            "IMG_0600.jpg IMG_2303.jpg" 
+            "IMG_3446.jpeg IMG_3435.jpg";
+            gap: 1em;
+        }
+
+        .right-grid img {
+            height:1fr;
+            width: 1fr;
+            border-radius: .5em;
+            transition: 100ms ease;
+        }
+
+        footer{
+            margin: 1em auto 3em auto;
+            width: min(1000px, 100%);
+        }
+
+        footer ul {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 2em;
+            
+        }
+
+        footer li:first-child {
+            margin-right: auto;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: var(--color-neutral);
+        }
+
+        footer a:hover{
+            text-decoration: underline;
+        }
+
+        @media(max-width: 615px){
+            nav li {
+                display: none;
+            }
+
+            nav li:first-child, nav li:last-child{
+                display: block;
+            }
+
+            right-grid {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
+
+
