@@ -151,8 +151,10 @@
             height: 55px;
         }
 
+        /* Reference Video for CSS styling https://www.youtube.com/watch?v=ZPMtug9qExk */
+
         .navbar {
-            margin: 1em auto 3em auto;
+            margin: 1em auto 1em auto;
             width: min(1000px, 100%);
         }
 
@@ -215,7 +217,7 @@
         }
 
         #headshot {
-            max-width: 100%;
+            max-width: 80%;
             border-radius: 2em;
             object-fit: cover;
             object-position: left;
@@ -226,16 +228,17 @@
         }
 
         .right-grid {
-            flex: 1;
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Creates 2 columns */
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-auto-rows: 200px;
+            grid-gap: 5px;
+            grid-auto-flow: dense;     
         }
 
         .right-grid img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
+            max-width: 100%;
+            object-fit: cover;
+            object-position: left;
         }
 
         .text-stuff {
@@ -269,44 +272,41 @@
             text-decoration: underline;
         }
 
-        /*Sidebar adapted from https://www.youtube.com/watch?v=U8smiWQ8Seg*/
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100vh;
-            width: 250px;
-            z-index: 999;
-            background-color: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            box-shadow: -10px 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
+        #specialBike {
+            width: 200;
         }
 
-        .sidebar li{
-            width: 100%;
+        #specialBrain {
+            width: 150;
         }
 
-        .sidebar a{
-            width: 100%;
-        }
 
         @media(max-width: 615px){
-            nav li {
-                display: none;
+            .navbar {
+                font-size: x-small;
             }
 
-            nav li:first-child, nav li:last-child{
-                display: block;
-            }
+        .right-grid {
+            flex: 1 1 400px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;   
+        }
 
-            right-grid {
-                display: flex;
-                flex-direction: column;
+        .right-grid img {
+        flex: 1 1 400px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        }
+            #specialBike{
+                height: 200px;
             }
+        
+            #specialBrain {
+                height: 150px;
+            }
+            
         }
 
         .pageLink a {
@@ -319,5 +319,14 @@
             color:#C8040E;
         }
         
+        .backBar{
+            text-decoration: none;
+            color: var(--color-neutral);
+        }
+
+        .backBar a:hover{
+            text-decoration: underline;
+            color:#C8040E;
+        }
 
 
