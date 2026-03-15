@@ -49,24 +49,23 @@
         }
 
         /* Typography Styles */
-        /*All font sizes are 1.25x bigger than the previous, starting with small text being 1rem*/
         h1 {
             position: relative;
-            font-size: 2.44140625rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: var(--spacing-md);
             color: var(--color-primary);
         }
 
         h2 {
-            font-size: 1.953125rem;
+            font-size: 2rem;
             font-weight: 600;
             margin-bottom: var(--spacing-md);
             color: var(--color-secondary);
         }
 
         h3 {
-            font-size: 1.5625rem;
+            font-size: 1.5rem;
             font-weight: 500;
             margin-bottom: var(--spacing-sm);
             color: var(--color-accent);
@@ -183,7 +182,7 @@
             margin: 2em auto;
             width: min(75em, 100%);
             padding: min(2em, 15%);
-            border-radius: 1em;
+            border-radius: 2em;
         }
 
         .flex-container {
@@ -191,18 +190,18 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 3em;
+            gap: 2em;
         }
 
         #headshot {
             max-width: 100%;
-            border-radius: 1em;
+            border-radius: 2em;
             object-fit: cover;
             object-position: left;
         }
         
         .text-container {
-            flex: 0 1 34em;
+            flex: 0 1 35em;
         }
 
         .right-grid {
