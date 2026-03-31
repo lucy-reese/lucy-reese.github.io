@@ -3,14 +3,14 @@ newBtn.addEventListener('click', getQuote);
 
 let answerBtn = document.querySelector('#js-tweet').addEventListener('click', showAnswer);
 
-const answerText = document.querySelector('#js-answer-text');
+
 
 let current = {
     question:"",
     answer:""
 }
 
-
+const answerText = document.querySelector('#js-answer-text');
 
 const endpoint = 'https://trivia.cyberwisp.com/getrandomchristmasquestion';
 
