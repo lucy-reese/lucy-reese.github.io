@@ -9,6 +9,7 @@
             position: relative;
             width: 100px;
             height: 100px;
+            border-radius: 20px;
         }
         .box-text {
             position: absolute;
@@ -40,8 +41,8 @@
 </head>
 <body>
     <canvas id="Canvas"></canvas>
-<div id="box" class="box"> <span class = "box-text">Volume</span></div>
-<button  class="submitButton" type="button">Submit Volume!</button>
+    <div id="box" class="box"> <span class = "box-text">Volume</span></div>
+    <button  class="submitButton" type="button">Submit Volume!</button> //Submit Volume Button
     <script>
         const canvas = document.getElementById('Canvas');
         const ctx = canvas.getContext('2d');
@@ -54,12 +55,13 @@
         const boxWidth = 150;
         let x = Math.random() * (canvas.width - boxWidth);
         let y = Math.random() * (canvas.height - boxHeight);
-        let dx = 5; 
-        let dy = 5; 
+        let dx = 0; //speed
+        let dy = 0; //speed
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
         let count = 0;
-        let newlabel = count+"%";
+        let newlabel = "-  "+count+"%  +";
+        var sButton = document.getElementById("submitButton"); //makes variable from HTML button
 
         function changeColor() {
             // Generate random RGB values
@@ -110,3 +112,8 @@
     </script>
 </body>
 </html>
+
+//Lucy's notepad
+/*
+- For speed, its pretty fast already, so we could do speed = count/2 or speed = speed+0.25
+*/
