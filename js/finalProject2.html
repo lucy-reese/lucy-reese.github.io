@@ -49,7 +49,7 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const size = 100;
+       
         const boxHeight = 100;
         const boxWidth = 150;
         let x = Math.random() * (canvas.width - boxWidth);
@@ -58,6 +58,8 @@
         let dy = 5; 
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
+        let count = 0;
+        let newlabel = count+"%";
 
         function changeColor() {
             // Generate random RGB values
@@ -79,17 +81,18 @@
             ctx.textAlign = "center";
             ctx.textBaseline = "top";
             ctx.fillText(label, x+(boxWidth/2), y+10);
+            ctx.fillText(newlabel, x+(boxWidth/2), y+50);
             x += dx;
             y += dy;
 
         
-            // Bounce off left/right walls
+            // Bounce off left/right window boundaries
             if (x + boxWidth >= canvas.width || x <= 0) {
                 dx *= -1;
                 changeColor();
             }
 
-            // Bounce off top/bottom walls
+            // Bounce off top/bottom window boundaries
             if (y + boxHeight >= canvas.height || y <= 0) {
                 dy *= -1;
                 changeColor();
