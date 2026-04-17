@@ -16,11 +16,32 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        .submitButton {
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            text-align: center;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+            border-radius: 10px;
+            background-color: tomato;
+            background-image: linear-gradient(
+                to top left,
+                rgb(0 0 0 / 0.2),
+                rgb(0 0 0 / 0.2) 30%,
+                transparent
+            );
+            box-shadow:
+                inset 2px 2px 3px rgb(255 255 255 / 0.6),
+                inset -2px -2px 3px rgb(0 0 0 / 0.6);
+        }
     </style>
 </head>
 <body>
     <canvas id="Canvas"></canvas>
 <div id="box" class="box"> <span class = "box-text">Volume</span></div>
+<button  class="submitButton" type="button">Submit Volume!</button>
     <script>
         const canvas = document.getElementById('Canvas');
         const ctx = canvas.getContext('2d');
@@ -51,6 +72,7 @@
 
             ctx.fillStyle = color;
             ctx.fillRect(x, y, boxWidth, boxHeight);
+
             //text
             ctx.fillStyle = "black";
             ctx.font = "bold 25px Helvetica";
@@ -60,6 +82,7 @@
             x += dx;
             y += dy;
 
+        
             // Bounce off left/right walls
             if (x + boxWidth >= canvas.width || x <= 0) {
                 dx *= -1;
