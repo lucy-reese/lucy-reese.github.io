@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Project</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #1a1a1a; }
+        canvas { display: block; }
+        .box {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .box-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="Canvas"></canvas>
+<div id="box" class="box"> <span class = "box-text">Volume</span></div>
+    <script>
+        const canvas = document.getElementById('Canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const size = 100;
+        const boxHeight = 100;
+        const boxWidth = 150;
+        let x = Math.random() * (canvas.width - boxWidth);
+        let y = Math.random() * (canvas.height - boxHeight);
+        let dx = 5; 
+        let dy = 5; 
+        let color = 'rgb(0, 255, 255)';
+        const label = "Volume";
+
+        function changeColor() {
+            // Generate random RGB values
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            color = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, boxWidth, boxHeight);
+            //text
+            ctx.fillStyle = "black";
+            ctx.font = "bold 25px Helvetica";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "top";
+            ctx.fillText(label, x+(boxWidth/2), y+10);
+            x += dx;
+            y += dy;
+
+            // Bounce off left/right walls
+            if (x + boxWidth >= canvas.width || x <= 0) {
+                dx *= -1;
+                changeColor();
+            }
+
+            // Bounce off top/bottom walls
+            if (y + boxHeight >= canvas.height || y <= 0) {
+                dy *= -1;
+                changeColor();
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        draw();
+    </script>
+</body>
+</html>

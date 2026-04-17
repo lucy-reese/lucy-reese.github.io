@@ -3,25 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Final Project</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #1a1a1a; }
+        canvas { display: block; }
+        .box {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .box-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 <body>
-    <canvas></canvas>
+    <canvas id ="canvas" ></canvas>
     <script>
+        <div id="box" class="box"> <span class = "box-text">Volume</span></div>
     // setup canvas
-        const canvas = document.querySelector("canvas");
-        const ctx = canvas.getContext("2d");
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
 
         const width = (canvas.width = window.innerWidth);
         const height = (canvas.height = window.innerHeight);
-
-        class Box {
-            draw(){
-                ctx.beginPath();
-                ctx.fillStyle = red;
-                ctx.fillRect(20,20,150,0);
-            }
+        const size = 50;
+        let x = Math.Random()*(canvas.width - size)
+        let y = Math.random() * (canvas.height - size);
+        let dx = 4; //horizontal speed
+        let dy = 4; //vertical speed
+        let color = rgb(0, 255, 255);
+        
+        function changeColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            color = `rgb(${r}, ${g}, ${b})`;
         }
+
+        function drawBox(){
+            //clearing the canvas
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.fillStyle = color;
+            ctx.fillRect(x,y,size,size);
+            //moving block
+            x += dx;
+            y += dy;
+            //if the box hits the wall then...
+            if (x + size > canvas.width || x < 0){
+                dx*= -1;
+                changeColor();
+            }
+
+            if (y + size > canvas.height || y<0){
+                dy *= -1;
+                changeColor();
+            }
+
+            requestAnimationFrame(draw);
+
+        }
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        })
+        update();
     </script>
 
 </body>

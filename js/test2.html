@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body { margin: 0; overflow: hidden; background: #111; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <canvas id="Canvas"></canvas>
+    <script>
+        const canvas = document.getElementById("Canvas");
+        const ctx = canvas.getContext("2d");
+
+        let x, y, dx, dy, color;
+        const rectSize = 60;
+
+        // 1. Set canvas to full window size
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Ensure rectangle doesn't get stuck outside after resize
+            x = Math.min(x, canvas.width - rectSize);
+            y = Math.min(y, canvas.height - rectSize);
+        }
+
+        function randomRGB() {
+            return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
+        }
+
+        // 2. Randomize the path (velocity)
+        function init() {
+            x = Math.random() * (window.innerWidth - rectSize);
+            y = Math.random() * (window.innerHeight - rectSize);
+            
+            // Random speed between 3 and 7, random direction (+ or -)
+            dx = (Math.random() * 4 + 3) * (Math.random() < 0.5 ? 1 : -1);
+            dy = (Math.random() * 4 + 3) * (Math.random() < 0.5 ? 1 : -1);
+            
+            color = randomRGB();
+            resize();
+        }
+
+        function animate() {
+            ctx.fillStyle = "rgba(17, 17, 17, 0.2)"; // Slight trail effect
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Bounce logic
+            if (x + dx > canvas.width - rectSize || x + dx < 0) {
+                dx = -dx;
+                color = getRandomColor();
+            }
+            if (y + dy > canvas.height - rectSize || y + dy < 0) {
+                dy = -dy;
+                color = getRandomColor();
+            }
+
+            x += dx;
+            y += dy;
+
+            ctx.fillStyle = color;
+            ctx.shadowBlur = 15; // Adds a glow effect
+            ctx.shadowColor = color;
+            ctx.fillRect(x, y, rectSize, rectSize);
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        init();
+        animate();
+    </script>
+</body>
+</html>

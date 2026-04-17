@@ -1,0 +1,27 @@
+<canvas id="gameCanvas" width="400" height="400" style="border:1px solid black;"></canvas>
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    let x = 50, y = 50, dx = 4, dy = 4, size = 30, color = 'blue';
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, size, size);
+
+        // Collision detection and color change
+        if (x + size > canvas.width || x < 0) {
+            dx = -dx;
+            color = '#' + Math.floor(Math.random()*16777215).toString(16); // Random color
+        }
+        if (y + size > canvas.height || y < 0) {
+            dy = -dy;
+            color = '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        x += dx;
+        y += dy;
+        requestAnimationFrame(draw);
+    }
+    draw();
+</script>
