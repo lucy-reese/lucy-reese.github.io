@@ -17,34 +17,33 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        /*
+        .button-container {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            pointer-events: none; /*lets clicks go through container to the button*/
+        }
         .submitButton {
-            border: 0;
+            pointer-events: auto; /*makes sure clicks go to the button after we disabled them for the container*/
+            border: 2;
             line-height: 2.5;
             padding: 0 20px;
             font-size: 1rem;
             text-align: center;
-            color: white;
-            text-shadow: 1px 1px 1px black;
+            color: black;
             border-radius: 10px;
-            background-color: tomato;
-            background-image: linear-gradient(
-                to top left,
-                rgb(0 0 0 / 0.2),
-                rgb(0 0 0 / 0.2) 30%,
-                transparent
-            );
-            box-shadow:
-                inset 2px 2px 3px rgb(255 255 255 / 0.6),
-                inset -2px -2px 3px rgb(0 0 0 / 0.6);
         }
-                */
+                
     </style>
 </head>
 <body>
     <canvas id="Canvas"></canvas>
     <div id="box" class="box"> <span class = "box-text">Volume</span></div>
-    <!-- button  class="submitButton" type="button">Submit Volume!</button> //Submit Volume Button*/-->
+    <div class="button-container"> 
+        <button id ="submitButton" class="submitButton" type="button">Submit Volume!</button>
+    </div>  //Submit Volume Button
     <script>
         const canvas = document.getElementById('Canvas');
         const ctx = canvas.getContext('2d');
@@ -52,7 +51,8 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-       
+       let isAnimationRunning = true;
+       const sButton = document.getElementById("submitButton");
         const boxHeight = 100;
         const boxWidth = 150;
         let x = Math.random() * (canvas.width - boxWidth);
@@ -62,7 +62,6 @@
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
         let count = 0;
-        //var sButton = document.getElementById("submitButton"); //makes variable from HTML button
 
         function changeColor() {
             // Generate random RGB values
@@ -74,8 +73,23 @@
 
         //controls the increment and decrement of the volume
         //https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect Quick Refrence for mdn page about getBoundingClientRect
+        sButton.addEventListener('click', function(){
+            if (isAnimationRunning) {
+                isAnimationRunning = false; 
+                alert("Your volume is " + count + "%");
+
+                sButton.style.opacity = "0.5";
+                sButton.style.cursor = "not-allowed";
+                sButton.innerText = "Submitted!";
+            }
+        })
         canvas.addEventListener('mousedown', function(e){
             //setting up mouse position with regards to the canvas/click event listener
+            
+            if (!isAnimationRunning){
+                return;
+            }
+            
             const rect = canvas.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
@@ -121,7 +135,13 @@
             ctx.textBaseline = "top";
             ctx.fillText(label, x+(boxWidth/2), y+10);
             ctx.fillText(newlabel, x+(boxWidth/2), y+50);
-/*
+
+            if (!isAnimationRunning){
+             return; // This stops the loop entirely
+             }
+    
+            
+        /*
             let hitWall = false;
             //turning the box when it hits a wall
             //hitting the left or right wall
