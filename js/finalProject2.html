@@ -55,7 +55,7 @@
         const boxWidth = 150;
         let x = Math.random() * (canvas.width - boxWidth);
         let y = Math.random() * (canvas.height - boxHeight);
-        let dx = 0; //speed
+        let dx = 5; //speed
         let dy = 0; //speed
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
@@ -96,6 +96,7 @@
             ctx.fillStyle = color;
             ctx.fillRect(x, y, boxWidth, boxHeight);
 
+            //draw text on box
             let newlabel = "-  "+count+"%  +";
             //text
             ctx.fillStyle = "black";
@@ -104,6 +105,35 @@
             ctx.textBaseline = "top";
             ctx.fillText(label, x+(boxWidth/2), y+10);
             ctx.fillText(newlabel, x+(boxWidth/2), y+50);
+/*
+            let hitWall = false;
+            //turning the box when it hits a wall
+            //hitting the left or right wall
+            if(x +boxWidth >= canvas.width || x <=0){
+                dx *= -1;
+                hitWall = true;
+            }
+            //hitting the top or bottom wall
+            if(y +boxHeight >= canvas.width || y <=0){
+                dy *= -1;
+                hitWall = true;
+            }
+            //turning it if we hit a wall
+            if(hitWall) {
+                let tempSize = boxWidth;
+                boxWidth = boxHeight;
+                boxHeight = tempSize;
+                let variable = dx;
+                dx = dy;
+                dy = variable;
+
+                //making sure the box stays in bounds after flipping it
+                changeColor();
+                x = Math.max(0, Math.min(x, canvas.width - boxWidth));
+                y = Math.max(0, Math.min(y, canvas.height - boxHeight));
+                
+            }
+*/
             x += dx;
             y += dy;
 
