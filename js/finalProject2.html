@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Final Project</title>
+    <title>Final Project Draft</title>
     <style>
         body { margin: 0; overflow: hidden; background: #1a1a1a; }
         canvas { display: block; }
@@ -42,7 +42,7 @@
 <body>
     <canvas id="Canvas"></canvas>
     <div id="box" class="box"> <span class = "box-text">Volume</span></div>
-    <button  class="submitButton" type="button">Submit Volume!</button> //Submit Volume Button
+    <!-- button  class="submitButton" type="button">Submit Volume!</button> //Submit Volume Button*/-->
     <script>
         const canvas = document.getElementById('Canvas');
         const ctx = canvas.getContext('2d');
@@ -61,7 +61,7 @@
         const label = "Volume";
         let count = 0;
         let newlabel = "-  "+count+"%  +";
-        var sButton = document.getElementById("submitButton"); //makes variable from HTML button
+        //var sButton = document.getElementById("submitButton"); //makes variable from HTML button
 
         function changeColor() {
             // Generate random RGB values
@@ -70,6 +70,26 @@
             const b = Math.floor(Math.random() * 256);
             color = `rgb(${r}, ${g}, ${b})`;
         }
+
+        //controls the increment and decrement of the volume
+        //https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect Quick Refrence for mdn page about getBoundingClientRect
+        canvas.addEventListener('mousedown', function(e){
+            //setting up mouse position with regards to the canvas/click event listener
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            //check if the click is in the volume box
+            if (mouseX >= x && mouseX <= x + boxWidth && mouseY >= y && mouseY <= y + boxHeight){
+                //Checking if it is plus or minus
+                if (mouseX < x +(boxWidth/2)){
+                    count--; //- button
+                }
+                else {
+                    count ++; //+ button
+                }
+            }
+        });
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
