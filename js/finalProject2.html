@@ -17,6 +17,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        /*
         .submitButton {
             border: 0;
             line-height: 2.5;
@@ -37,6 +38,7 @@
                 inset 2px 2px 3px rgb(255 255 255 / 0.6),
                 inset -2px -2px 3px rgb(0 0 0 / 0.6);
         }
+                */
     </style>
 </head>
 <body>
@@ -55,7 +57,7 @@
         const boxWidth = 150;
         let x = Math.random() * (canvas.width - boxWidth);
         let y = Math.random() * (canvas.height - boxHeight);
-        let dx = 5; //speed
+        let dx = 0; //speed
         let dy = 0; //speed
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
@@ -87,6 +89,20 @@
                 else {
                     count ++; //+ button
                 }
+                //change speed based on volume
+                //use abs to make sure the speed is always positive
+                //Math.sign helps to remember which direction it is going
+                let currentSpeed = Math.abs(count)*0.25;
+                if (dx !== 0){
+                    dx = Math.sign(dx) * currentSpeed;
+                }
+                if (dy !== 0) {
+                    dy = Math.sign(dy) * currentSpeed
+                }
+                if (dx === 0 && count !== 0){
+                    dx = currentSpeed;
+                    dy = currentSpeed;
+                }
             }
         });
 
@@ -113,8 +129,13 @@
                 dx *= -1;
                 hitWall = true;
             }
+            else if (x <= 0) {
+                x = 0; // Snap to edge
+                dx *= -1;
+                changeColor();
+            }
             //hitting the top or bottom wall
-            if(y +boxHeight >= canvas.width || y <=0){
+            if(y +boxHeight >= canvas.height || y <=0){
                 dy *= -1;
                 hitWall = true;
             }
