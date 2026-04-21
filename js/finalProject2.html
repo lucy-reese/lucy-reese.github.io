@@ -60,7 +60,6 @@
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
         let count = 0;
-        let newlabel = "-  "+count+"%  +";
         //var sButton = document.getElementById("submitButton"); //makes variable from HTML button
 
         function changeColor() {
@@ -97,6 +96,7 @@
             ctx.fillStyle = color;
             ctx.fillRect(x, y, boxWidth, boxHeight);
 
+            let newlabel = "-  "+count+"%  +";
             //text
             ctx.fillStyle = "black";
             ctx.font = "bold 25px Helvetica";
