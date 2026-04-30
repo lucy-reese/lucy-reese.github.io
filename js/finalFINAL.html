@@ -76,7 +76,7 @@
                 this.type = type; //rectangle or circle
                 this.size = 100;
                 this.x = Math.random() *(canvas.width - this.size);
-                this.y = Math.random() * (canvas.height = this.size);
+                this.y = Math.random() * (canvas.height - this.size);
 
                 //random direction
                 let speedMultiplier = (Math.random()*2)+1;
@@ -90,14 +90,14 @@
                 if(this.type === 'rect'){
                     ctx.fillRect(this.x, this.y, this.size, this.size);
                 }
-                else if (this.type===circle){
+                else if (this.type === 'circle'){
                     ctx.beginPath();
                     ctx.arc(this.x + this.size/2, this.y +this.size/2, this.size/2, 0, Math.PI*2);
                     ctx.fill();
                 }
                 ctx.fillStyle = "black";
                 ctx.font = "bold 20px Helvetica";
-                ctx.textAligh = "center";
+                ctx.textAlign = "center";
                 ctx.fillText("- " + count + "% +", this.x + (this.size/2), this.y + (this.size/2) + 7);
             }
             update() {
@@ -161,7 +161,7 @@
             const mouseY = e.clientY - rect.top;
 
             //check if the click is in the volume box
-            shape.forEach(shape => {
+            shapes.forEach(shape => {
                 if(shape.isClicked(mouseX, mouseY)){
                     if (mouseX < shape.x + (shape.size/2)){
                         count--;
@@ -177,6 +177,7 @@
                     });
                 }
             });
+            /* Old code for 1 box
             if (mouseX >= x && mouseX <= x + boxWidth && mouseY >= y && mouseY <= y + boxHeight){
                 //Checking if it is plus or minus
                 if (mouseX < x +(boxWidth/2)){
@@ -200,9 +201,19 @@
                     dy = currentSpeed;
                 }
             }
+                */
         });
 
         function draw() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            shapes.forEach(shape => {
+                shape.update();
+                shape.draw();
+            });
+            if (isAnimationRunning){
+                requestAnimationFrame(draw);
+            }
+            /* old draw code
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = color;
@@ -245,9 +256,11 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+          
         });
-
+        */
         draw();
+        }
     </script>
 </body>
 </html>
