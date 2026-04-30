@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Project</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #1a1a1a; }
+        canvas { display: block; }
+        .box {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+        }
+        .box-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .button-container {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            pointer-events: none; /*lets clicks go through container to the button*/
+        }
+        .submitButton {
+            pointer-events: auto; /*makes sure clicks go to the button after we disabled them for the container*/
+            border: 2;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            text-align: center;
+            color: black;
+            border-radius: 10px;
+        }
+                
+    </style>
+</head>
+<body>
+    <canvas id="Canvas"></canvas>
+    <div id="box" class="box"> <span class = "box-text">Volume</span></div>
+    <div class="button-container"> 
+        <button id ="submitButton" class="submitButton" type="button">Submit Volume!</button>
+    </div>  //Submit Volume Button
+    <script>
+        const canvas = document.getElementById('Canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+       let isAnimationRunning = true;
+       const sButton = document.getElementById("submitButton");
+        const boxHeight = 100;
+        const boxWidth = 150;
+        let x = Math.random() * (canvas.width - boxWidth);
+        let y = Math.random() * (canvas.height - boxHeight);
+        let dx = 0; //speed
+        let dy = 0; //speed
+        let color = 'rgb(0, 255, 255)';
+        const label = "Volume";
+        let count = 0;
+
+        function changeColor() {
+            // Generate random RGB values
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            color = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        //controls the increment and decrement of the volume
+        //https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect Quick Refrence for mdn page about getBoundingClientRect
+        sButton.addEventListener('click', function(){
+            if (isAnimationRunning) {
+                isAnimationRunning = false; 
+                alert("Your volume is " + count + "%");
+
+                sButton.style.opacity = "0.5";
+                sButton.style.cursor = "not-allowed";
+                sButton.innerText = "Submitted!";
+            }
+        })
+        canvas.addEventListener('mousedown', function(e){
+            //setting up mouse position with regards to the canvas/click event listener
+            
+            if (!isAnimationRunning){
+                return;
+            }
+            
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            //check if the click is in the volume box
+            if (mouseX >= x && mouseX <= x + boxWidth && mouseY >= y && mouseY <= y + boxHeight){
+                //Checking if it is plus or minus
+                if (mouseX < x +(boxWidth/2)){
+                    count--; //- button
+                }
+                else {
+                    count ++; //+ button
+                }
+                //change speed based on volume
+                //use abs to make sure the speed is always positive
+                //Math.sign helps to remember which direction it is going
+                let currentSpeed = Math.abs(count)*0.25;
+                if (dx !== 0){
+                    dx = Math.sign(dx) * currentSpeed;
+                }
+                if (dy !== 0) {
+                    dy = Math.sign(dy) * currentSpeed
+                }
+                if (dx === 0 && count !== 0){
+                    dx = currentSpeed;
+                    dy = currentSpeed;
+                }
+            }
+        });
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, boxWidth, boxHeight);
+
+            //draw text on box
+            let newlabel = "-  "+count+"%  +";
+            //text
+            ctx.fillStyle = "black";
+            ctx.font = "bold 25px Helvetica";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "top";
+            ctx.fillText(label, x+(boxWidth/2), y+10);
+            ctx.fillText(newlabel, x+(boxWidth/2), y+50);
+
+            if (!isAnimationRunning){
+             return; // This stops the loop entirely
+             }
+    
+            
+            x += dx;
+            y += dy;
+
+        
+            // Bounce off left/right window boundaries
+            if (x + boxWidth >= canvas.width || x <= 0) {
+                dx *= -1;
+                changeColor();
+            }
+
+            // Bounce off top/bottom window boundaries
+            if (y + boxHeight >= canvas.height || y <= 0) {
+                dy *= -1;
+                changeColor();
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        draw();
+    </script>
+</body>
+</html>
