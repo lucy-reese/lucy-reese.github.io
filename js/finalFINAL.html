@@ -43,6 +43,8 @@
     <!--<div id="box" class="box"> <span class = "box-text">Volume</span></div>-->
     <div class="button-container"> 
         <button id ="submitButton" class="submitButton" type="button">Submit Volume!</button>
+        <button id="resetButton" class="submitButton" type="button" style="margin-left: 10px; display: none;">Try Again</button>
+</div>
     </div>  //Submit Volume Button
     <script>
         const canvas = document.getElementById('Canvas');
@@ -143,15 +145,19 @@
 
         //controls the increment and decrement of the volume
         //https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect Quick Refrence for mdn page about getBoundingClientRect
-        sButton.addEventListener('click', function(){
+        sButton.addEventListener('click', function() {
             if (isAnimationRunning) {
-                isAnimationRunning = false; 
-                alert("Your volume is " + count + "%");
-                sButton.style.opacity = "0.5";
-                sButton.style.cursor = "not-allowed";
-                sButton.innerText = "Submitted!";
-            }
-        })
+                 isAnimationRunning = false;
+            alert("Your volume is " + count + "%");
+        
+            sButton.style.opacity = "0.5";
+            sButton.style.cursor = "not-allowed";
+            sButton.innerText = "Submitted!";
+            
+            // show the reset button 
+            rButton.style.display = "inline-block";
+    }
+});
         canvas.addEventListener('mousedown', function(e){
             //setting up mouse position with regards to the canvas/click event listener
             
@@ -167,13 +173,13 @@
             shapes.forEach(shape => {
                 if(shape.isClicked(mouseX, mouseY)){
                     if (mouseX < shape.x + (shape.size/2)){
-                        count--;
+                        count = Math.max(0, count-1); //make sure it doesn't go below 0;
                     }
                     else {
                         count++;
                     }
                     //updating speed based on count
-                    let currentSpeed = Math.abs(count)*0.15;
+                    let currentSpeed = Math.abs(count)*0.15 +0.5;
                     shapes.forEach(s=> {
                         s.dx = Math.sign(s.dx)*currentSpeed;
                         s.dy = Math.sign(s.dy) *currentSpeed;
@@ -263,6 +269,31 @@
           
         });
         draw();
+        const rButton = document.getElementById("resetButton");
+
+        rButton.addEventListener('click', function() {
+            // reset variables
+            count = 0;
+            isAnimationRunning = true;
+
+            // reset shapes (randomize positions and speeds again)
+            shapes.forEach(s => {
+                s.x = Math.random() * (canvas.width - s.size);
+                s.y = Math.random() * (canvas.height - s.size);
+                s.dx = (Math.random() < 0.5 ? 1 : -1) * 2;
+                s.dy = (Math.random() < 0.5 ? 1 : -1) * 2;
+                s.color = 'rgb(0,255,255)';
+            });
+
+            // reset UI Buttons
+            sButton.style.opacity = "1";
+            sButton.style.cursor = "pointer";
+            sButton.innerText = "Submit Volume!";
+            rButton.style.display = "none"; // Hide reset button again
+
+            // restart the draw loop
+            draw();
+        });
     </script>
 </body>
 </html>
