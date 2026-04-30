@@ -51,8 +51,10 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-       let isAnimationRunning = true;
-       const sButton = document.getElementById("submitButton");
+        let isAnimationRunning = true;
+        const sButton = document.getElementById("submitButton");
+        let count = 0;
+        /* Extra code, maybe interfering with shapes loading?
         const boxHeight = 100;
         const boxWidth = 150;
         let x = Math.random() * (canvas.width - boxWidth);
@@ -61,8 +63,9 @@
         let dy = 0; //speed
         let color = 'rgb(0, 255, 255)';
         const label = "Volume";
-        let count = 0;
-
+        */
+        
+        /*
         function changeColor() {
             // Generate random RGB values
             const r = Math.floor(Math.random() * 256);
@@ -70,6 +73,7 @@
             const b = Math.floor(Math.random() * 256);
             color = `rgb(${r}, ${g}, ${b})`;
         }
+        */
 
         class Shape {
             constructor(type) {
@@ -101,8 +105,9 @@
                 ctx.fillText("- " + count + "% +", this.x + (this.size/2), this.y + (this.size/2) + 7);
             }
             update() {
-                if (!isAnimationRunning) return;
-
+                if (!isAnimationRunning){
+                    return;
+                }
                 this.x += this.dx;
                 this.y += this.dy;
 
@@ -126,8 +131,7 @@
 
             isClicked(mouseX, mouseY) {
                 // Rectangle collision detection
-                return (mouseX >= this.x && mouseX <= this.x + this.size &&
-                        mouseY >= this.y && mouseY <= this.y + this.size);
+                return (mouseX >= this.x && mouseX <= this.x + this.size && mouseY >= this.y && mouseY <= this.y + this.size);
             }
         }
 
@@ -143,7 +147,6 @@
             if (isAnimationRunning) {
                 isAnimationRunning = false; 
                 alert("Your volume is " + count + "%");
-
                 sButton.style.opacity = "0.5";
                 sButton.style.cursor = "not-allowed";
                 sButton.innerText = "Submitted!";
@@ -252,13 +255,13 @@
 
             requestAnimationFrame(draw);
         }
-
+*/
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
           
         });
-        */
+        
         draw();
         }
     </script>
