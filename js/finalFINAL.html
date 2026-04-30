@@ -44,8 +44,8 @@
     <div class="button-container"> 
         <button id ="submitButton" class="submitButton" type="button">Submit Volume!</button>
         <button id="resetButton" class="submitButton" type="button" style="margin-left: 10px; display: none;">Reset</button>
-</div>
-    </div>  //Submit Volume Button
+    </div>
+    </div>  
     <script>
         const canvas = document.getElementById('Canvas');
         const ctx = canvas.getContext('2d');
@@ -78,9 +78,10 @@
         */
 
         class Shape {
-            constructor(type, incrementValue) {
+            constructor(type, incrementValue, speedScale) {
                 this.type = type; //rectangle or circle
                 this.increment = incrementValue;
+                this.speedScale = speedScale;
                 this.size = 100;
                 this.x = Math.random() *(canvas.width - this.size);
                 this.y = Math.random() * (canvas.height - this.size);
@@ -140,9 +141,10 @@
         }
 
         const shapes = [
-            new Shape('rect', 1),
-            new Shape ('circle', 3),
-            new Shape ('rect', 7)
+            new Shape('rect', 1, 0.25),
+            new Shape ('circle', 3, 0.5),
+            new Shape ('circle', 5, 0.75),
+            new Shape ('rect', 7, 1.25)
         ];
 
         //controls the increment and decrement of the volume
@@ -178,13 +180,15 @@
                         count = Math.max(0, count-shape.increment); //make sure it doesn't go below 0;
                     }
                     else {
-                        count = Math.min(100, count+ shape.increment);
+                        count = Math.min(100, count+shape.increment);//make sure it doesn't go above 100
                     }
                     //updating speed based on count
-                    let currentSpeed = Math.abs(count)*0.05 +0.5;
-                    shapes.forEach(s=> {
-                        s.dx = Math.sign(s.dx)*currentSpeed;
-                        s.dy = Math.sign(s.dy) *currentSpeed;
+                    shapes.forEach(s => {
+                        let baseSpeed = (count * 0.15) +0.5;
+
+                        let individualSpeed = baseSpeed *s.speedScale;
+                        s.dx = Math.sign(s.dx) * individualSpeed;
+                        s.dy = Math.sign(s.dy) * individualSpeed;
                     });
                 }
             });
