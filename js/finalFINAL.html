@@ -43,7 +43,7 @@
     <!--<div id="box" class="box"> <span class = "box-text">Volume</span></div>-->
     <div class="button-container"> 
         <button id ="submitButton" class="submitButton" type="button">Submit Volume!</button>
-        <button id="resetButton" class="submitButton" type="button" style="margin-left: 10px; display: none;">Try Again</button>
+        <button id="resetButton" class="submitButton" type="button" style="margin-left: 10px; display: none;">Reset</button>
 </div>
     </div>  //Submit Volume Button
     <script>
@@ -78,8 +78,9 @@
         */
 
         class Shape {
-            constructor(type) {
+            constructor(type, incrementValue) {
                 this.type = type; //rectangle or circle
+                this.increment = incrementValue;
                 this.size = 100;
                 this.x = Math.random() *(canvas.width - this.size);
                 this.y = Math.random() * (canvas.height - this.size);
@@ -104,6 +105,7 @@
                 ctx.fillStyle = "black";
                 ctx.font = "bold 20px Helvetica";
                 ctx.textAlign = "center";
+                
                 ctx.fillText("- " + count + "% +", this.x + (this.size/2), this.y + (this.size/2) + 7);
             }
             update() {
@@ -138,9 +140,9 @@
         }
 
         const shapes = [
-            new Shape('rect'),
-            new Shape ('circle'),
-            new Shape ('rect')
+            new Shape('rect', 1),
+            new Shape ('circle', 3),
+            new Shape ('rect', 7)
         ];
 
         //controls the increment and decrement of the volume
@@ -173,13 +175,13 @@
             shapes.forEach(shape => {
                 if(shape.isClicked(mouseX, mouseY)){
                     if (mouseX < shape.x + (shape.size/2)){
-                        count = Math.max(0, count-1); //make sure it doesn't go below 0;
+                        count = Math.max(0, count-shape.increment); //make sure it doesn't go below 0;
                     }
                     else {
-                        count++;
+                        count = Math.min(100, count+ shape.increment);
                     }
                     //updating speed based on count
-                    let currentSpeed = Math.abs(count)*0.15 +0.5;
+                    let currentSpeed = Math.abs(count)*0.05 +0.5;
                     shapes.forEach(s=> {
                         s.dx = Math.sign(s.dx)*currentSpeed;
                         s.dy = Math.sign(s.dy) *currentSpeed;
